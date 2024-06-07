@@ -14,6 +14,7 @@ public class MovieAPI {
     private static final String URL = "https://prog2.fh-campuswien.ac.at/movies"; // https if certificates work
     private static final OkHttpClient client = new OkHttpClient();
 
+    //CHANGE THIS
     private String buildUrl(UUID id) {
         StringBuilder url = new StringBuilder(URL);
         if (id != null) {
@@ -22,6 +23,7 @@ public class MovieAPI {
         return url.toString();
     }
 
+    //CHANGE THIS
     private static String buildUrl(String query, Genre genre, String releaseYear, String ratingFrom) {
         StringBuilder url = new StringBuilder(URL);
 

@@ -9,6 +9,7 @@ public class DescendingState extends State{
     public DescendingState(MovieListController movieListController) {
         super(movieListController);
     }
+
     @Override
     public void sort() {
         movieListController.observableMovies.sort(Comparator.comparing(Movie::getTitle).reversed());

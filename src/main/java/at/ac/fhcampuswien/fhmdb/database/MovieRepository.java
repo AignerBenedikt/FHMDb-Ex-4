@@ -8,12 +8,21 @@ import java.util.List;
 public class MovieRepository {
     Dao<MovieEntity, Long> dao;
 
-    public MovieRepository() throws DataBaseException {
+    private static MovieRepository instance;
+
+    private MovieRepository() throws DataBaseException {
         try {
             this.dao = DatabaseManager.getInstance().getMovieDao();
         } catch (Exception e) {
             throw new DataBaseException(e.getMessage());
         }
+    }
+
+    public static synchronized MovieRepository getInstance() throws DataBaseException {
+        if(instance == null) {
+            instance = new MovieRepository();
+        }
+        return instance;
     }
 
     public long countRows() throws DataBaseException {

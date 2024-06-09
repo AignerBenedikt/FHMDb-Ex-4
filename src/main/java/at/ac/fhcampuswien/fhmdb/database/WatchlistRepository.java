@@ -8,12 +8,21 @@ public class WatchlistRepository {
 
     Dao<WatchlistMovieEntity, Long> dao;
 
-    public WatchlistRepository() throws DataBaseException {
+    private static WatchlistRepository instance;
+
+    private WatchlistRepository() throws DataBaseException {
         try {
             this.dao = DatabaseManager.getInstance().getWatchlistDao();
         } catch (Exception e) {
             throw new DataBaseException(e.getMessage());
         }
+    }
+
+    public static synchronized WatchlistRepository getInstance() throws DataBaseException {
+        if(instance == null) {
+            instance = new WatchlistRepository();
+        }
+        return instance;
     }
 
     public List<WatchlistMovieEntity> getWatchlist() throws DataBaseException {
